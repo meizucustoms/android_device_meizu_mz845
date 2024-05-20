@@ -8,6 +8,9 @@
 
 set -e
 
+export DEVICE=mz845
+export VENDOR=meizu
+
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
@@ -22,12 +25,9 @@ fi
 source "${HELPER}"
 
 # Initialize the helper for common
-setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true
+setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true
 
-# Warning headers and guards
-write_headers "beryllium dipper equuleus perseus polaris ursa"
-
-# The standard common blobs
+# The standard blobs
 write_makefiles "${MY_DIR}/proprietary-files.txt" true
 
 # Finish

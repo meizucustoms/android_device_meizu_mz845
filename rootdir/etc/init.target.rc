@@ -1,0 +1,233 @@
+on post-fs
+    write /proc/bootprof "INIT:post-fs"
+    start qseecomd
+    exec - system system -- /vendor/bin/init.qti.qseecomd.sh
+    write /dev/ipa 1
+
+service vendor.adsprpcd /vendor/bin/adsprpcd
+   class main
+   user system
+   group media
+
+service vendor.cdsprpcd /vendor/bin/cdsprpcd
+   class main
+   user system
+   group system
+
+service vendor.qseecomd /vendor/bin/qseecomd
+    class core
+    user root
+    group root
+    
+service vendor.imsrcsservice /system/vendor/bin/imsrcsd
+    class main
+    user system
+    group radio diag inet log
+    disabled
+
+on property:vendor.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+   class main
+   user system
+   group radio diag inet log
+   disabled
+
+on property:vendor.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start vendor.imsrcsservice
+
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio log diag
+
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet log diag
+    disabled
+
+service ipacm /system/vendor/bin/ipacm
+    class main
+    user radio
+    group radio inet
+    disabled
+
+service time_daemon /system/vendor/bin/time_daemon
+    class main
+    user root
+    group root
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+on init
+    # Vibration motors
+    chown system system /sys/class/meizu/motor/on_off
+    chown system system /sys/class/meizu/motor/set_cspress
+    chown system system /sys/class/meizu/motor/set_mback
+    chown system system /sys/class/meizu/motor/rtp
+    chown system system /sys/class/meizu/motor/set_rtp
+    chown system system /sys/class/meizu/motor/freq
+    chown system system /sys/class/timed_output/vibrator/enable
+    chown system system /sys/class/meizu/motor/timeout
+    chown system system /sys/class/meizu/motor/proline
+    chmod 0666 /sys/class/meizu/motor/on_off
+    chmod 0666 /sys/class/meizu/motor/set_cspress
+    chmod 0666 /sys/class/meizu/motor/set_mback
+    chmod 0666 /sys/class/meizu/motor/rtp
+    chmod 0666 /sys/class/meizu/motor/set_rtp
+    chmod 0666 /sys/class/meizu/motor/freq
+    chmod 0666 /sys/class/timed_output/vibrator/enable
+    chmod 0666 /sys/class/meizu/motor/timeout
+    chmod 0666 /sys/class/meizu/motor/proline
+
+    # Control press pressure
+    chown system system /sys/cs_press/cs_press/sleep
+    chown system system /sys/cs_press/cs_press/cal_data
+    chown system system /dev/ndt
+    chmod 0666 /sys/cs_press/cs_press/sleep
+    chmod 0666 /sys/cs_press/cs_press/cal_data
+    chmod 0666 /dev/ndt
+    # Disable by default
+    write /sys/cs_press/cs_press/sleep 1
+
+
+on post-fs-data
+    # Display color mode
+    chown system system /sys/class/meizu/lcm/display/lut
+    chmod 0660 /sys/class/meizu/lcm/display/lut
+
+    # SRS
+    chown system system /sys/srs/srs_enable
+    chown system system /sys/srs/srs_debug
+    chown system system /sys/srs/srs_cpulevel
+    chown system system /sys/srs/srs_gpulevel
+    chown system system /sys/srs/srs_buslevel
+    chown system system /sys/srs/srs_iolevel
+    chown system system /sys/srs/srs_memlevel
+    chmod 0664 /sys/srs/srs_enable
+    chmod 0664 /sys/srs/srs_debug
+    chmod 0664 /sys/srs/srs_cpulevel
+    chmod 0664 /sys/srs/srs_gpulevel
+    chmod 0664 /sys/srs/srs_buslevel
+    chmod 0664 /sys/srs/srs_iolevel
+    chmod 0664 /sys/srs/srs_memlevel
+
+    # RSTINFO
+    chown system system /sys/rstinfo/rstinfo_enable
+    chown system system /proc/stability/rstinfo_cnt
+    chown system system /proc/stability/rootinfo_cnt
+    chown system system /proc/stability/rstinfo_debug
+    chown system system /proc/stability/rstinfo_cnt_log
+    chown system system /proc/stability/rstinfo_rst_log
+    chown system system /proc/stability/rstinfo_android_cnt
+    restorecon /sys/rstinfo/rstinfo_enable
+
+    # Cirrus calibration
+    chown system audio /dev/msm_cirrus_playback
+    chmod 0660 /dev/msm_cirrus_playback
+
+    # Start FOD HAL
+    setprop sys.meizu.fingerprint.boot start
+
+on boot
+    # MZ_RPMB_CTL
+    chown system system /dev/mz_rpmb_ctl
+    chmod 0600 /dev/mz_rpmb_ctl
+
+    # Display
+    # HBM mode
+    chown system system /sys/class/meizu/lcm/display/hbm
+    chmod 0644 /sys/class/meizu/lcm/display/hbm
+    # Allow system to toggle DC Dimming
+    chown system system /sys/class/meizu/lcm/display/DC_Enable
+    chmod 0660 /sys/class/meizu/lcm/display/DC_Enable
+    # AOD
+    chown system system /sys/class/meizu/lcm/display/doze_mode
+    chown system system /sys/class/meizu/lcm/display/aod
+    chown system system /sys/class/meizu/lcm/display/doze_s2
+    chmod 0666 /sys/class/meizu/lcm/display/doze_mode
+    chmod 0666 /sys/class/meizu/lcm/display/aod
+    chmod 0666 /sys/class/meizu/lcm/display/doze_s2
+    # Sunnyscreen mode
+    chown system system /sys/class/meizu/lcm/display/sunnyscreen
+    chmod 0644 /sys/class/meizu/lcm/display/sunnyscreen
+    # Screen off gestures
+    chown system system /sys/class/meizu/tp/gesture_control
+    chmod 0660 /sys/class/meizu/tp/gesture_control
+
+    # Meizu Sensor Test service
+    chown system system /vendor/bin/mz_sensor_test
+    chmod 0666 /vendor/bin/mz_sensor_test
+
+    # UDFPS
+    chown system system /sys/class/meizu/fp/qos_set
+    chmod 0644 /sys/class/meizu/fp/qos_set
+
+    # Charging and USB stuff
+    chown system system /sys/class/meizu/charger/fast_usb_mode
+    chown system system /sys/class/meizu/charger/fastcharging
+    chown system system /sys/class/meizu/usb_thermal/sync_temp
+    chmod 0666 /sys/class/meizu/charger/fast_usb_mode
+    chmod 0666 /sys/class/meizu/charger/fastcharging
+    chmod 0444 /sys/class/meizu/usb_thermal/sync_temp
+    # Enabled by default
+    write /sys/class/meizu/charger/fast_usb_mode 1
+    write /sys/class/meizu/charger/fastcharging 1
+
+    # Breath led mode
+    chown system system /sys/class/meizu/mx_leds/leds/breath/blink
+    chmod 0664 /sys/class/meizu/mx_leds/leds/breath/blink
+
+    # Wifi firmware reload
+    chown wifi wifi /sys/module/wlan/parameters/fwpath

@@ -36,7 +36,7 @@
 
 #define ALPHABET_LEN 256
 
-#define XBL_PART_PATH "/dev/block/bootdevice/by-name/xbl_a"
+#define XBL_PART_PATH "/dev/block/bootdevice/by-name/xbl"
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING=TZ."
 #define TZ_VER_STR_LEN 27
 #define TZ_VER_BUF_LEN 255
@@ -188,6 +188,6 @@ Value* VerifyTrustZoneFn(const char* name, State* state,
     return StringValue(strdup(ret ? "1" : "0"));
 }
 
-void Register_librecovery_updater_xiaomi() {
-    RegisterFunction("xiaomi.verify_trustzone", VerifyTrustZoneFn);
+void Register_librecovery_updater_meizu() {
+    RegisterFunction("meizu.verify_trustzone", VerifyTrustZoneFn);
 }
