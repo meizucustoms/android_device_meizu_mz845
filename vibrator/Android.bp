@@ -1,0 +1,38 @@
+cc_library_shared {
+    name: "vendor.meizu.hardware.vibrator.impl",
+    vendor: true,
+    cflags: [],
+    srcs: [
+        "Vibrator.cpp",
+    ],
+    shared_libs: [
+        "libcutils",
+        "libutils",
+        "liblog",
+        "libbinder_ndk",
+        "android.hardware.vibrator-V1-ndk",
+    ],
+    export_include_dirs: ["include"]
+}
+
+cc_binary {
+    name: "vendor.meizu.hardware.vibrator.service",
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["vendor.meizu.hardware.vibrator.service.rc"],
+    vintf_fragments: [
+        "vendor.meizu.hardware.vibrator.service.xml",
+    ],
+    cflags: [],
+    srcs: [
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libcutils",
+        "libutils",
+        "libbase",
+        "libbinder_ndk",
+        "android.hardware.vibrator-V1-ndk",
+        "vendor.meizu.hardware.vibrator.impl",
+    ],
+}
