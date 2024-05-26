@@ -57,6 +57,19 @@ if [ -z "${SRC}" ]; then
     SRC="adb"
 fi
 
+function blob_fixup() {
+    case "${1}" in
+        vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so | vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so)
+            grep -q libhidlbase_shim.so "{$2}" || patchelf --add-needed "libhidlbase_shim.so" "${2}"
+            grep -q libbase_shim.so "{$2}" || patchelf --add-needed "libbase_shim.so" "${2}"
+            ;;
+        # vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so|vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so)
+        #     grep -q libhidlbase_shim.so "{$2}" || patchelf --add-needed "libhidlbase_shim.so" "${2}"
+        #     grep -q libbase_shim.so "{$2}" || patchelf --add-needed "libbase_shim.so" "${2}"
+        #     ;;
+    esac
+}
+
 if [ -z "${ONLY_TARGET}" ]; then
     # Initialize the helper for common device
     setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" true "${CLEAN_VENDOR}"
