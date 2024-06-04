@@ -79,30 +79,26 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl \
-    android.hardware.audio.effect@6.0-impl \
+    android.hardware.audio@6.0-impl:32 \
+    android.hardware.audio.effect@6.0-impl:32 \
     android.hardware.audio.service \
-    android.hardware.bluetooth.audio-impl \
-    android.hardware.soundtrigger@2.1-impl \
+    android.hardware.bluetooth.audio-impl:32 \
+    android.hardware.soundtrigger@2.1-impl:32 \
     audio.bluetooth.default \
-    audio.primary.sdm845 \
+    audio.primary.sdm845:32 \
     audio.r_submix.default \
     audio.usb.default \
-    libbatterylistener \
-    libcirrusspkrprot \
-    libcomprcapture \
-    libexthwplugin \
-    libhdmiedid \
-    libhfp \
+    libcirrusspkrprot:32 \
+    libhdmiedid:32 \
+    libhfp:32 \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libsndmonitor \
-    libspkrprot \
-    libssrec \
-    libsynth \
+    libsndmonitor:32 \
+    libspkrprot:32 \
     libtinycompress \
     libvolumelistener \
+    sound_trigger.primary.sdm845:32 \
     tinymix
 
 PRODUCT_COPY_FILES += \
