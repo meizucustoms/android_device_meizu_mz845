@@ -632,8 +632,12 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
+    <path name="deep-buffer-playback speaker">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
+    </path>
+
     <path name="deep-buffer-playback speaker-protected">
-        <path name="deep-buffer-playback" />
+        <path name="deep-buffer-playback speaker" />
     </path>
 
     <path name="deep-buffer-playback display-port">
@@ -694,8 +698,12 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
+    <path name="low-latency-playback speaker">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
     <path name="low-latency-playback speaker-protected">
-        <path name="low-latency-playback" />
+        <path name="low-latency-playback speaker" />
     </path>
 
     <path name="low-latency-playback display-port">
@@ -760,8 +768,12 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia8" value="1" />
     </path>
 
+    <path name="audio-ull-playback speaker">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia8" value="1" />
+    </path>
+
     <path name="audio-ull-playback speaker-protected">
-        <path name="audio-ull-playback" />
+        <path name="audio-ull-playback speaker" />
     </path>
 
     <path name="audio-ull-playback headphones">
@@ -825,8 +837,12 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
+    <path name="compress-offload-playback speaker">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
     <path name="compress-offload-playback speaker-protected">
-        <path name="compress-offload-playback" />
+        <path name="compress-offload-playback speaker" />
     </path>
 
     <path name="compress-offload-playback display-port">
@@ -1876,6 +1892,77 @@
     <path name="cirrus-spkr-vi-record">
     </path>
 
+    <path name="deep-buffer-playback receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
+    </path>
+
+    <path name="low-latency-playback receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
+    <path name="audio-ull-playback receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia8" value="1" />
+    </path>
+
+    <path name="compress-offload-playback receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback2 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia7" value="1" />
+    </path>
+
+    <path name="compress-offload-playback3 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
+    <path name="compress-offload-playback4 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia11" value="1" />
+    </path>
+
+    <path name="compress-offload-playback5 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia12" value="1" />
+    </path>
+
+    <path name="compress-offload-playback6 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia13" value="1" />
+    </path>
+
+    <path name="compress-offload-playback7 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia14" value="1" />
+    </path>
+
+    <path name="compress-offload-playback8 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia15" value="1" />
+    </path>
+
+    <path name="compress-offload-playback9 receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia16" value="1" />
+    </path>
+
+    <path name="voicemmode1-call receiver">
+        <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode1" value="1" />
+        <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
+    </path>
+
+    <path name="voicemmode2-call receiver">
+        <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode2" value="1" />
+        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
+    </path>
+
+    <path name="audio-playback-voip receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
+    <path name="compress-voip-call receiver">
+        <ctl name="QUAT_MI2S_RX_Voice Mixer Voip" value="1" />
+        <ctl name="Voip_Tx Mixer SLIM_0_TX_Voip" value="1" />
+    </path>
+
+    <path name="mmap-playback receiver">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia16" value="1" />
+    </path>
+
     <!-- These are actual sound device specific mixer settings -->
     <path name="amic1">
         <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
@@ -2049,6 +2136,7 @@
         <ctl name="Cirrus SP" value="Config SP Enable" />
         <ctl name="Cirrus SP Usecase Config" value="Music" />
         <ctl name="Cirrus SP Channel Swap" value="LR" />
+        <ctl name="QUAT_MI2S_RX Channels" value="Two" />
         <path name="amp-receiver" />
         <path name="amp-speaker" />
     </path>
@@ -2059,6 +2147,7 @@
     </path>
 
     <path name="speaker-mono">
+        <ctl name="QUAT_MI2S_RX Channels" value="Two" />
         <path name="amp-receiver" />
         <ctl name="RCV AMP PCM Gain" value="2" />
     </path>
@@ -2066,12 +2155,14 @@
     <path name="speaker-mono-2">
         <ctl name="Cirrus SP" value="Config SP Enable" />
         <ctl name="Cirrus SP Usecase Config" value="Music" />
+        <ctl name="QUAT_MI2S_RX Channels" value="Two" />
         <path name="amp-speaker" />
     </path>
 
     <path name="voice-speaker-stereo">
         <ctl name="Cirrus SP" value="Config SP Enable" />
         <ctl name="Cirrus SP Usecase Config" value="Handsfree" />
+        <ctl name="QUAT_MI2S_RX Channels" value="Two" />
         <path name="amp-receiver" />
         <ctl name="RCV AMP PCM Gain" value="15" />
         <path name="amp-speaker" />
@@ -2085,6 +2176,7 @@
     <path name="voice-speaker-mono-2">
         <ctl name="Cirrus SP" value="Config SP Enable" />
         <ctl name="Cirrus SP Usecase Config" value="Handsfree" />
+        <ctl name="QUAT_MI2S_RX Channels" value="Two" />
         <path name="amp-speaker" />
         <ctl name="SPK AMP PCM Gain" value="15" />
     </path>
@@ -2113,6 +2205,10 @@
         <ctl name="Cirrus SP Channel Swap" value="RL" />
     </path>
 
+    <path name="echo-reference speaker">
+        <path name="echo-reference quat-mi2s" />
+    </path>
+
     <path name="echo-reference handset">
         <path name="echo-reference quat-mi2s" />
     </path>
@@ -2123,6 +2219,10 @@
 
     <path name="echo-reference speaker-stereo">
         <path name="echo-reference quat-mi2s" />
+    </path>
+
+     <path name="voice-echo-reference speaker">
+        <path name="voice-echo-reference quat-mi2s" />
     </path>
 
     <path name="voice-echo-reference speaker-stereo">
@@ -2975,6 +3075,10 @@
 
     <path name="mmap-playback">
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia16" value="1" />
+    </path>
+
+    <path name="mmap-playback speaker">
+        <path name="mmap-playback" />
     </path>
 
     <path name="mmap-playback headphones">
