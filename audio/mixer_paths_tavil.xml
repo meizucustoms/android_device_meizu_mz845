@@ -62,6 +62,7 @@
     <ctl name="SLIMBUS_6_RX Port Mixer SLIM_0_TX" value="0" />
     <ctl name="SLIMBUS_4_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="SLIMBUS_4_RX Audio Mixer MultiMedia2" value="0" />
+    <ctl name="MultiMedia1 Mixer QUAT_MI2S_TX" value="0" />
     <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="0" />
     <ctl name="MultiMedia5 Mixer AFE_PCM_TX" value="0" />
     <ctl name="MultiMedia5 Mixer SLIM_8_TX" value="0" />
@@ -184,6 +185,7 @@
     <ctl name="SLIM_1_TX Channels" value="One" />
     <ctl name="QUAT_MI2S_RX Channels" value="Two" />
     <ctl name="QUAT_MI2S_TX Channels" value="Four" />
+    <ctl name="QUAT_MI2S_RX_VI_FB_MUX" value="ZERO" />
     <ctl name="AIF1_CAP Mixer SLIM TX9" value="0"/>
     <ctl name="AIF1_CAP Mixer SLIM TX8" value="0"/>
     <ctl name="AIF1_CAP Mixer SLIM TX7" value="0" />
@@ -328,6 +330,7 @@
     <ctl name="AFE_PCM_RX Audio Mixer MultiMedia3" value="0" />
 
     <!-- Loopback -->
+    <ctl name="QUAT_MI2S_RX_DL_HL Switch" value="0" />
     <ctl name="QUAT_MI2S_RX Port Mixer SLIM_0_TX" value="0" />
     <!-- Loopback end-->
 
@@ -1890,6 +1893,11 @@
     </path>
 
     <path name="cirrus-spkr-vi-record">
+    </path>
+
+    <path name="cirrus-spkr-vi-record speaker-prot-vi">
+        <path name="cirrus-spkr-vi-record" />
+        <path name="speaker-prot-vi" />
     </path>
 
     <path name="deep-buffer-playback receiver">
