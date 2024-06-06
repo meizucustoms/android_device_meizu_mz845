@@ -438,6 +438,8 @@ const char * const use_case_table[AUDIO_USECASE_MAX] = {
     [USECASE_AUDIO_RECORD_BUS_REAR_SEAT] = "rear-seat-record",
     [USECASE_AUDIO_PLAYBACK_SYNTHESIZER] = "synth-loopback",
     [USECASE_AUDIO_RECORD_ECHO_REF_EXT] = "echo-reference-external",
+
+    [USECASE_AUDIO_CIRRUS_SPKR_CALIB_TX] = "cirrus-spkr-vi-record",
 };
 
 static const audio_usecase_t offload_usecases[] = {

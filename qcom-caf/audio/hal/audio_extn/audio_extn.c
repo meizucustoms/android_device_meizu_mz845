@@ -1836,12 +1836,7 @@ void spkr_prot_feature_init(bool is_feature_enabled)
     ALOGD("%s: Called with feature %s, vendor_enhanced_info 0x%x", __func__,
             is_feature_enabled ? "Enabled" : "NOT Enabled", vendor_enhanced_info);
     if (is_feature_enabled) {
-        // dlopen lib
-        if ((vendor_enhanced_info & 0x3) == 0x0) // Pure AOSP
-            spkr_prot_lib_handle = dlopen(CIRRUS_SPKR_PROT_LIB_PATH, RTLD_NOW);
-        else
-            spkr_prot_lib_handle = dlopen(SPKR_PROT_LIB_PATH, RTLD_NOW);
-
+        spkr_prot_lib_handle = dlopen(CIRRUS_SPKR_PROT_LIB_PATH, RTLD_NOW);
         if (spkr_prot_lib_handle == NULL) {
             ALOGE("%s: dlopen failed", __func__);
             goto feature_disabled;

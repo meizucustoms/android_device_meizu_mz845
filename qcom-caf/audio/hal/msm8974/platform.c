@@ -487,7 +487,7 @@ static int pcm_device_table[AUDIO_USECASE_MAX][2] = {
     [USECASE_INCALL_MUSIC_UPLINK2] = {INCALL_MUSIC_UPLINK2_PCM_DEVICE,
                                       INCALL_MUSIC_UPLINK2_PCM_DEVICE},
     [USECASE_AUDIO_SPKR_CALIB_RX] = {SPKR_PROT_CALIB_RX_PCM_DEVICE, -1},
-    [USECASE_AUDIO_SPKR_CALIB_TX] = {-1, SPKR_PROT_CALIB_TX_PCM_DEVICE},
+    [USECASE_AUDIO_SPKR_CALIB_TX] = {-1, CIRRUS_SPKR_PROT_CALIB_TX_PCM_DEVICE},
 
     [USECASE_AUDIO_PLAYBACK_AFE_PROXY] = {AFE_PROXY_PLAYBACK_PCM_DEVICE,
                                           AFE_PROXY_RECORD_PCM_DEVICE},
@@ -540,6 +540,8 @@ static int pcm_device_table[AUDIO_USECASE_MAX][2] = {
     [USECASE_AUDIO_RECORD_BUS_REAR_SEAT] = {REAR_SEAT_PCM_DEVICE, REAR_SEAT_PCM_DEVICE},
     [USECASE_AUDIO_PLAYBACK_SYNTHESIZER] = {-1, -1},
     [USECASE_AUDIO_RECORD_ECHO_REF_EXT] = {MULTIMEDIA2_PCM_DEVICE, MULTIMEDIA2_PCM_DEVICE},
+
+    [USECASE_AUDIO_CIRRUS_SPKR_CALIB_TX] = {-1, CIRRUS_SPKR_PROT_CALIB_TX_PCM_DEVICE},
 };
 
 /* Array to store sound devices */
@@ -807,6 +809,8 @@ static const char * const device_table[SND_DEVICE_MAX] = {
     [SND_DEVICE_IN_ICC] = "speaker-mic",
     [SND_DEVICE_IN_SYNTH_MIC] = "speaker-mic",
     [SND_DEVICE_IN_ECHO_REFERENCE] = "echo-reference",
+    [SND_DEVICE_IN_CAPTURE_CIRRUS_VI_FEEDBACK] = "speaker-prot-vi",
+    [SND_DEVICE_IN_CAPTURE_CIRRUS_VI_RECEIVER] = "speaker-prot-vi",
 };
 
 // Platform specific backend bit width table
@@ -1098,6 +1102,9 @@ static int acdb_device_table[SND_DEVICE_MAX] = {
     [SND_DEVICE_IN_CALL_PROXY] = 33,
     [SND_DEVICE_IN_ICC] = 46,
     [SND_DEVICE_IN_SYNTH_MIC] = 11,
+
+    [SND_DEVICE_IN_CAPTURE_CIRRUS_VI_FEEDBACK] = 188,
+    [SND_DEVICE_IN_CAPTURE_CIRRUS_VI_RECEIVER] = 189,
 };
 
 struct name_to_index {
@@ -1347,6 +1354,8 @@ static struct name_to_index snd_device_name_index[SND_DEVICE_MAX] = {
     {TO_NAME_INDEX(SND_DEVICE_IN_CAMCORDER_SELFIE_LANDSCAPE)},
     {TO_NAME_INDEX(SND_DEVICE_IN_CAMCORDER_SELFIE_INVERT_LANDSCAPE)},
     {TO_NAME_INDEX(SND_DEVICE_IN_CAMCORDER_SELFIE_PORTRAIT)},
+    {TO_NAME_INDEX(SND_DEVICE_IN_CAPTURE_CIRRUS_VI_FEEDBACK)},
+    {TO_NAME_INDEX(SND_DEVICE_IN_CAPTURE_CIRRUS_VI_RECEIVER)},
     /* For legacy xml file parsing */
     {TO_NAME_INDEX(SND_DEVICE_IN_CAMCORDER_MIC)},
     {TO_NAME_INDEX(SND_DEVICE_IN_BUS)},
@@ -1439,6 +1448,7 @@ static struct name_to_index usecase_name_index[AUDIO_USECASE_MAX] = {
     {TO_NAME_INDEX(USECASE_AUDIO_RECORD_BUS_FRONT_PASSENGER)},
     {TO_NAME_INDEX(USECASE_AUDIO_RECORD_BUS_REAR_SEAT)},
     {TO_NAME_INDEX(USECASE_AUDIO_PLAYBACK_SYNTHESIZER)},
+    {TO_NAME_INDEX(USECASE_AUDIO_CIRRUS_SPKR_CALIB_TX)},
 };
 
 static const struct name_to_index usecase_type_index[USECASE_TYPE_MAX] = {
@@ -2687,6 +2697,8 @@ static void set_platform_defaults(struct platform_data * my_data)
     hw_interface_table[SND_DEVICE_OUT_SYNTH_SPKR] = strdup("TERT_TDM_RX_0");
     hw_interface_table[SND_DEVICE_IN_SYNTH_MIC] = strdup("TERT_TDM_TX_0");
     hw_interface_table[SND_DEVICE_IN_ECHO_REFERENCE] = strdup("SEC_TDM_TX_0");
+    hw_interface_table[SND_DEVICE_IN_CAPTURE_CIRRUS_VI_FEEDBACK] = strdup("QUAT_MI2S_TX");
+    hw_interface_table[SND_DEVICE_IN_CAPTURE_CIRRUS_VI_RECEIVER] = strdup("QUAT_MI2S_TX");
     my_data->max_mic_count = PLATFORM_DEFAULT_MIC_COUNT;
 
      /*remove ALAC & APE from DSP decoder list based on software decoder availability*/
